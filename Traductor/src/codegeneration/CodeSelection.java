@@ -298,6 +298,7 @@ public class CodeSelection extends DefaultVisitor {
 	     	out("push " + node.getType().getSize());
 	     	out("mul");
 	     	out("add");
+	     	node.getName().accept(this, CodeFunction.ADDRESS);
 	     }
 		 return null;
 	}
