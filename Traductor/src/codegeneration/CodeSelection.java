@@ -233,6 +233,8 @@ public class CodeSelection extends DefaultVisitor {
 
 	//	class AccesoCampo { Expression expression;  String name; }
 	public Object visit(AccesoCampo node, Object param) {
+		//TODO: Generar codigo correcto de acceso.
+		
 		if(((CodeFunction)param) == CodeFunction.VALUE) {
 			visit(node, CodeFunction.ADDRESS);
 	        out("load", node.getType());

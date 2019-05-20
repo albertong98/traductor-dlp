@@ -55,7 +55,7 @@ public class MemoryAllocation extends DefaultVisitor {
 
 	//	class StructDefinition { StructType structtype;  List<Definition> definition; }
 	public Object visit(StructDefinition node, Object param) {
-
+		//TODO: Asignar direcciones correctamente.
 		// super.visit(node, param);
 		int relativeAddress = 0;
 		if (node.getStructtype() != null)

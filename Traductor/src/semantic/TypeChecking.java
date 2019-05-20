@@ -282,7 +282,7 @@ public class TypeChecking extends DefaultVisitor {
 
 	//	class AccesoCampo { Expression expression;  String name; }
 	public Object visit(AccesoCampo node, Object param) {
-
+		//TODO: Arreglar tipado de los campos.
 //		super.visit(node, param);
 //
 		if (node.getExpression() != null)
