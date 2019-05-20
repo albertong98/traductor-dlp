@@ -288,8 +288,16 @@ public class CodeSelection extends DefaultVisitor {
 	        out("load", node.getType());
 	     }else if(((CodeFunction) param) == CodeFunction.ADDRESS){ // Funcion.DIRECCION
 	    	assert (param == CodeFunction.ADDRESS);
-	     	out("pusha " + node.searchDefinition().getAddress());
+	     	if(node.searchDefinition().isLocal()) {
+	     		out("push "+node.getDefinition().getAddress());
+				out("add");
+	     	}else
+	     		out("pusha " + node.searchDefinition().getAddress());
+	         	
 	     	node.getIndex().accept(this, CodeFunction.VALUE);
+	     	out("push " + node.getType().getSize());
+	     	out("mul");
+	     	out("add");
 	     }
 		 return null;
 	}
