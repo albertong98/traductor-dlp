@@ -101,7 +101,7 @@ public class MemoryAllocation extends DefaultVisitor {
 		
 		if (node.getParams() != null && !node.getParams().isEmpty()){
 			currentAddress = 4;
-			for(int i=node.getParams().size();i>=0;i--){
+			for(int i=node.getParams().size()-1;i>=0;i--){
 				VarDefinition child = (VarDefinition)node.getParams().get(i);
 				child.setLocal(true);
 				child.setAddress(currentAddress);

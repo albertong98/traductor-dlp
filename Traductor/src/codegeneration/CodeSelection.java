@@ -283,13 +283,30 @@ public class CodeSelection extends DefaultVisitor {
 
 	//	class AccesoArray { Expression name;  Expression index; }
 	public Object visit(AccesoArray node, Object param) {
-		 if (((CodeFunction) param) == CodeFunction.VALUE) {
+		if (((CodeFunction) param) == CodeFunction.VALUE) {
 	        visit(node, CodeFunction.ADDRESS);
 	        out("load", node.getType());
 	     }else if(((CodeFunction) param) == CodeFunction.ADDRESS){ // Funcion.DIRECCION
 	    	assert (param == CodeFunction.ADDRESS);
-	     	out("pusha " + node.searchDefinition().getAddress());
+	     	
+	    	if(node.searchDefinition() instanceof VarDefinition && ((VarDefinition)node.searchDefinition()).isLocal()) {
+	     		out("push "+node.getDefinition().getAddress());
+				out("add");
+	     	}else {
+	     		int address;
+	     		
+	     		Definition definition = node.searchDefinition();
+	     		if(definition instanceof Campo) address = ((Campo)definition).getAddress();
+	     		else address = ((VarDefinition)definition).getAddress();
+	     		
+	     		out("pusha " + address);
+	     	}
+	         	
 	     	node.getIndex().accept(this, CodeFunction.VALUE);
+	     	out("push " + node.getType().getSize());
+	     	out("mul");
+	     	out("add");
+	     	node.getName().accept(this, CodeFunction.ADDRESS);
 	     }
 		 return null;
 	}

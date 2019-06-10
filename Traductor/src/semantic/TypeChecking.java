@@ -145,7 +145,7 @@ public class TypeChecking extends DefaultVisitor {
 		if (node.getExpression() != null)
 			node.getExpression().accept(this, param);
 		
-		predicado(tipoSimple(node.getExpression().getType()),"la expresión debe ser de tipo simple",node);
+		predicado(tipoSimple(node.getExpression().getType()),"la expresiï¿½n debe ser de tipo simple",node);
 
 		return null;
 	}
@@ -179,8 +179,8 @@ public class TypeChecking extends DefaultVisitor {
 		if (node.getExpression() != null)
 			node.getExpression().accept(this, param);
 		
-		predicado(tipoSimple(node.getExpression().getType()),"la expresión debe ser de tipo simple",node);
-		predicado(node.getExpression().isModificable(),"la expresión debe ser modificable",node);
+		predicado(tipoSimple(node.getExpression().getType()),"la expresiï¿½n debe ser de tipo simple",node);
+		predicado(node.getExpression().isModificable(),"la expresiï¿½n debe ser modificable",node);
 
 		return null;
 	}
@@ -227,7 +227,7 @@ public class TypeChecking extends DefaultVisitor {
 		if (node.getExpressions() != null)
 			for (Expression child : node.getExpressions())
 				child.accept(this, param);
-		predicado(node.getExpressions().size() == node.getDefinition().getParams().size(),"No coincide el número de parametros",node);
+		predicado(node.getExpressions().size() == node.getDefinition().getParams().size(),"No coincide el nï¿½mero de parametros",node);
 		predicado(comprobarTipos(node.getDefinition().getParams(),node.getExpressions()),"No coinciden los tipos de los parametros");
 		return null;
 	}
@@ -330,7 +330,7 @@ public class TypeChecking extends DefaultVisitor {
 			for (Expression child : node.getExpressions())
 				child.accept(this, param);
 		
-		predicado(node.getExpressions().size() == node.getDefinition().getParams().size(),"No coincide el número de parametros",node);
+		predicado(node.getExpressions().size() == node.getDefinition().getParams().size(),"No coincide el nï¿½mero de parametros",node);
 		predicado(comprobarTipos(node.getDefinition().getParams(),node.getExpressions()),"No coinciden los tipos de los parametros");
 		node.setType(node.getDefinition().getType());
 		node.setModificable(false);
@@ -349,7 +349,7 @@ public class TypeChecking extends DefaultVisitor {
 		if (node.getIndex() != null)
 			node.getIndex().accept(this, param);
 		
-		VarDefinition definition = node.searchDefinition();
+		Definition definition = node.searchDefinition();
 		predicado(node.getIndex().getType() instanceof IntType, "El indice debe ser entero",node);
 		predicado(definition != null && definition.getType() instanceof ArrayType,"La variable debe ser de tipo array",node);
 		
@@ -405,7 +405,7 @@ public class TypeChecking extends DefaultVisitor {
      */
     private void predicado(boolean condicion, String mensajeError, Position posicionError) {
         if (!condicion)
-            errorManager.notify("Comprobación de tipos", mensajeError, posicionError);
+            errorManager.notify("Comprobaciï¿½n de tipos", mensajeError, posicionError);
     }
 
     private void predicado(boolean condicion, String mensajeError, AST node) {

@@ -53,11 +53,13 @@ public class AccesoArray extends AbstractExpression {
 		this.definition = definition;
 	}
 	
-	public VarDefinition searchDefinition() {
+	public Definition searchDefinition() {
 		if(name instanceof AccesoArray)
-			return ((AccesoArray)name).searchDefinition();
-		else if(name instanceof Variable)
-			return ((Variable)name).getDefinition();
+		return ((AccesoArray)name).searchDefinition();
+	else if(name instanceof Variable)
+		return ((Variable)name).getDefinition();
+	else if(name instanceof AccesoCampo)
+		return ((AccesoCampo)name).getDefinition();
 		
 		return null;
 	}
