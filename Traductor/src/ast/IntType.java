@@ -19,7 +19,7 @@ public class IntType extends AbstractType {
 
 
 	public String toString() {
-       return "{IntType}";
+       return "IntType";
 	}
 	
 	public int getSize() {

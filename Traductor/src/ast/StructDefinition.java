@@ -69,6 +69,13 @@ public class StructDefinition extends AbstractDefinition {
 	private List<Definition> definition;
 
 	public String toString() {
-       return "{structtype:" + getStructtype() + ", definition:" + getDefinition() + "}";
+		  StringBuffer sb = new StringBuffer();
+		  sb.append("{\n");
+		  for(Definition def: definition){
+			  sb.append(((Campo)def).getName() + ":" + ((Campo) def).getType());
+			  sb.append("\n");
+		  }
+		  sb.append("}");
+		  return sb.toString();
    }
 }

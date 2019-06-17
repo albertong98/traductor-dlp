@@ -41,7 +41,7 @@ public class StructType extends AbstractType {
 	private int size;
 	
 	public String toString() {
-       return "{name:" + getName() + "}";
+       return getName();
    }
 	
 	public int getSize() {
@@ -59,6 +59,6 @@ public class StructType extends AbstractType {
 
 	@Override
 	public String getMAPLName() {
-		return "struct";
+		return name;
 	}
 }

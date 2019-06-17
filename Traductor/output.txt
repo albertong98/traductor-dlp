@@ -1,26 +1,17 @@
 #source "prueba.txt"
 call main
 halt
-#GLOBAL entero:int
-#GLOBAL caracter:byte
-#GLOBAL pareja:struct
-#GLOBAL edad:int
-#GLOBAL empleados:struct
 push 2
-#GLOBAL acme:struct
-#GLOBAL fibonacci:int
+#FUNC p
 p:
+ret 0,0,0
+#FUNC f
 f:
 pusha bp
-#GLOBAL paramReal:float
 pusha bp
-#GLOBAL paramInt:int
 pusha bp
-#GLOBAL localReal:float
 pusha bp
-#GLOBAL digito:byte
 pusha bp
-#GLOBAL resultado:int
 #line 30
 push -4
 add
@@ -69,9 +60,10 @@ f2i
 storei
 push -7
 add
+ret 2,7,6
+#FUNC inicializa
 inicializa:
 pusha bp
-#GLOBAL i:int
 #line 46
 pusha 11
 push 0
@@ -120,13 +112,13 @@ add
 push 1
 storei
 #line 54
-inicio_bucle:
+inicio_bucle0:
 push -2
 add
 loadi
 push 8
 lti
-jz final
+jz final0
 #line 51
 pusha 11
 push 0
@@ -242,13 +234,13 @@ loadi
 push 1
 addi
 storei
-jmp inicio_bucle
-final:
+jmp inicio_bucle0
+final0:
+ret 0,0,0
+#FUNC main
 main:
 pusha bp
-#GLOBAL i:int
 pusha bp
-#GLOBAL j:int
 call p
 #line 66
 push -2
@@ -290,13 +282,13 @@ add
 push 0
 storei
 #line 86
-inicio_bucle:
+inicio_bucle1:
 push -2
 add
 loadi
 push 8
 lti
-jz final
+jz final1
 #line 76
 pushb 39
 outb
@@ -379,8 +371,8 @@ loadi
 push 1
 addi
 storei
-jmp inicio_bucle
-final:
+jmp inicio_bucle1
+final1:
 #line 89
 pusha 3
 push 0
@@ -399,26 +391,26 @@ add
 push 0
 storei
 #line 99
-inicio_bucle:
+inicio_bucle2:
 push -2
 add
 loadi
 push 2
 lti
-jz final
+jz final2
 #line 94
 push -4
 add
 push 0
 storei
 #line 97
-inicio_bucle:
+inicio_bucle3:
 push -4
 add
 loadi
 push 2
 lti
-jz final
+jz final3
 #line 96
 pusha 3
 push 0
@@ -440,8 +432,8 @@ loadi
 push 1
 addi
 storei
-jmp inicio_bucle
-final:
+jmp inicio_bucle3
+final3:
 #line 99
 push -2
 add
@@ -451,34 +443,34 @@ loadi
 push 1
 addi
 storei
-jmp inicio_bucle
-final:
+jmp inicio_bucle2
+final2:
 #line 103
 push -2
 add
 push 0
 storei
 #line 110
-inicio_bucle:
+inicio_bucle4:
 push -2
 add
 loadi
 push 2
 lti
-jz final
+jz final4
 #line 105
 push -4
 add
 push 0
 storei
 #line 108
-inicio_bucle:
+inicio_bucle5:
 push -4
 add
 loadi
 push 2
 lti
-jz final
+jz final5
 #line 107
 pusha 3
 push 0
@@ -494,8 +486,8 @@ loadi
 push 1
 addi
 storei
-jmp inicio_bucle
-final:
+jmp inicio_bucle5
+final5:
 #line 110
 push -2
 add
@@ -505,5 +497,6 @@ loadi
 push 1
 addi
 storei
-jmp inicio_bucle
-final:
+jmp inicio_bucle4
+final4:
+ret 0,0,0

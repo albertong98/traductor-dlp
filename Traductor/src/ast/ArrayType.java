@@ -60,7 +60,7 @@ public class ArrayType extends AbstractType {
 	private Type type;
 
 	public String toString() {
-       return "{expression:" + getExpression() + ", type:" + getType() + "}";
+       return type.toString();
    }
 
 	@Override

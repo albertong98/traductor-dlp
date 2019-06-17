@@ -58,20 +58,25 @@ public class CodeSelection extends DefaultVisitor {
 
 	//	class VarDefinition { String name;  Type type; }
 	public Object visit(VarDefinition node, Object param) {
-		out("#GLOBAL " + node.getName() + ":" + node.getType().getMAPLName());
+		//if(node.isLocal())
+			//out("#LOCAL " + node.getName() + ":" + node.getType().getMAPLName());
+		//else
+			//out("#GLOBAL " + node.getName() + ":" + node.getType().getMAPLName());
 		
         return null;
 	}
 
 	//	class StructDefinition { StructType structtype;  List<Definition> definition; }
 	public Object visit(StructDefinition node, Object param) {
-		//out("#GLOBAL " + node.getStructtype().getName() + ":" + node.getType().getMAPLName());
+		
+		//out("#TYPE " + node.getStructtype().getName() + ":" + node.toString());
 		visitChildren(node.getDefinition(),param);
 		return null;
 	}
 
 	//	class FuncDefinition { String name;  List<Definition> params;  List<Definition> defs;  List<Sentence> sentence;  Type type; }
 	public Object visit(FuncDefinition node, Object param) {
+		out("#FUNC " + node.getName());
 		out(node.getName()+":");
 		for(Definition child : node.getParams()){
 			out("pusha bp");
@@ -82,12 +87,14 @@ public class CodeSelection extends DefaultVisitor {
 			child.accept(this, CodeFunction.ADDRESS);
 		}
 		visitChildren(node.getSentence(),param);
+		if(node.getType() == null)
+			out("ret 0,0,0");
 		return null;
 	}
 
 	//	class Campo { String name;  Type type; }
 	public Object visit(Campo node, Object param) {
-		out("#GLOBAL " + node.getName() + ":" + node.getType().getMAPLName());
+		//out("#GLOBAL " + node.getName() + ":" + node.getType().getMAPLName());
 		// super.visit(node, param);
 
 		if (node.getType() != null)
@@ -167,14 +174,17 @@ public class CodeSelection extends DefaultVisitor {
 	//	class While { Expression condition;  List<Sentence> sentences; }
 	public Object visit(While node, Object param) {
 		out("#line " + node.getEnd().getLine());
-		out("inicio_bucle:");
+		int nBucle = this.nBucle;
+		++this.nBucle;
+		out("inicio_bucle"+nBucle+":");
 		node.getCondition().accept(this,param);
-		out("jz final");
+		out("jz final"+nBucle);
 		if(node.getSentences()!=null)
 			for(Sentence child:node.getSentences())
 				child.accept(this, param);
-		out("jmp inicio_bucle");
-		out("final:");
+		out("jmp inicio_bucle"+nBucle);
+		out("final"+nBucle+":");
+		
 		return null;
 	}
 
@@ -201,12 +211,20 @@ public class CodeSelection extends DefaultVisitor {
 
 	//	class Return { Expression expression; }
 	public Object visit(Return node, Object param) {
-
 		// super.visit(node, param);
-
 		if (node.getExpression() != null)
 			node.getExpression().accept(this, param);
+		FuncDefinition funcDef = node.getFuncDefinition();
+		
+		int paramSize = 0;
+		for(Definition def:funcDef.getParams())
+			paramSize += def.getType().getSize();
 
+		int varSize = 0;
+		for(Definition def:funcDef.getDefs())
+			varSize+= def.getType().getSize();
+		
+		out(String.format("ret %1$s,%2$s,%3$s",funcDef.getType().getSize(),varSize,paramSize)); 
 		return null;
 	}
 
@@ -344,6 +362,7 @@ public class CodeSelection extends DefaultVisitor {
 
     private PrintWriter writer;
     private String sourceFile;
-    
+	private int nBucle;
+	
     private Map<String,String> instrucciones = new HashMap<String,String>();
 }

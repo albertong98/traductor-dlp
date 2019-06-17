@@ -19,7 +19,7 @@ public class RealType extends AbstractType {
 
 
 	public String toString() {
-       return "{RealType}";
+       return "RealType";
    }
 	
 	public int getSize() {

@@ -86,6 +86,7 @@ public class Identification extends DefaultVisitor {
 
 		// super.visit(node, param);
 		variables.set();
+
 		if (node.getParams() != null)
 			for (Definition child : node.getParams())
 				child.accept(this, param);
@@ -94,14 +95,18 @@ public class Identification extends DefaultVisitor {
 			for (Definition child : node.getDefs())
 				child.accept(this, param);
 
-		if (node.getSentence() != null)
-			for (Sentence child : node.getSentence())
+		if (node.getSentence() != null){
+			for (Sentence child : node.getSentence()){
 				child.accept(this, param);
-		
+				if(child instanceof Return)
+					((Return)child).setFuncDefinition(node);
+			}
+		}
 		FuncDefinition definition = funciones.get(node.getName());
 		predicado(definition == null,"Funcion ya definida: "+node.getName(),node);
 		funciones.put(node.getName(), node);
 		variables.reset();
+		
 		return null;
 	}
 
@@ -233,7 +238,7 @@ public class Identification extends DefaultVisitor {
 
 		if (node.getExpression() != null)
 			node.getExpression().accept(this, param);
-
+		
 		return null;
 	}
 

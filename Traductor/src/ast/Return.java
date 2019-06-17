@@ -41,8 +41,17 @@ public class Return extends AbstractSentence {
 	}
 
 	private Expression expression;
+	private FuncDefinition funcDefinition;
 
 	public String toString() {
        return "{expression:" + getExpression() + "}";
    }
+
+	public FuncDefinition getFuncDefinition() {
+		return funcDefinition;
+	}
+
+	public void setFuncDefinition(FuncDefinition funcDefinition) {
+		this.funcDefinition = funcDefinition;
+	}
 }
