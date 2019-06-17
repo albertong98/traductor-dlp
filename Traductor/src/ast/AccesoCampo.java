@@ -52,11 +52,13 @@ public class AccesoCampo extends AbstractExpression {
 		this.definition = definition;
 	}
 	
-	public VarDefinition searchDefinition() {
+	public Definition searchDefinition() {
 		if(expression instanceof AccesoCampo)
 			return ((AccesoCampo) expression).searchDefinition();
 		else if( expression instanceof Variable)
 			return ((Variable) expression).getDefinition();
+		else if(expression instanceof AccesoArray)
+			return ((AccesoArray) expression).searchDefinition();
 		
 		return null;
 	}

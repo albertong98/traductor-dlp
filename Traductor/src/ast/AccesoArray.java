@@ -59,7 +59,7 @@ public class AccesoArray extends AbstractExpression {
 	else if(name instanceof Variable)
 		return ((Variable)name).getDefinition();
 	else if(name instanceof AccesoCampo)
-		return ((AccesoCampo)name).getDefinition();
+		return ((AccesoCampo)name).searchDefinition();
 		
 		return null;
 	}

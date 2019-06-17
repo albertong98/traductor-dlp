@@ -238,7 +238,11 @@ public class CodeSelection extends DefaultVisitor {
 	        out("load", node.getType());
 		}else {
 			assert(param == CodeFunction.ADDRESS);
-			out("pusha " + node.searchDefinition().getAddress());
+			Definition def = node.searchDefinition();
+			if(def instanceof VarDefinition)
+				out("pusha " +((VarDefinition)def).getAddress());
+			else if(def instanceof Campo)
+				out("pusha " +((Campo)def).getAddress());
 			out("push "+node.getDefinition().getAddress());
 			out("add");
 		}

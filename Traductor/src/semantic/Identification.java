@@ -373,7 +373,7 @@ public class Identification extends DefaultVisitor {
      */
     private void predicado(boolean condicion, String mensajeError, Position posicionError) {
         if (!condicion)
-            errorManager.notify("Comprobación de tipos", mensajeError, posicionError);
+            errorManager.notify("Comprobaciï¿½n de tipos", mensajeError, posicionError);
     }
 
     private void predicado(boolean condicion, String mensajeError, AST node) {

@@ -287,7 +287,7 @@ public class TypeChecking extends DefaultVisitor {
 //
 		if (node.getExpression() != null)
 			node.getExpression().accept(this, param);
-		Campo definition = node.getDefinition();
+		Definition definition = node.searchDefinition();
 		predicado(node.getExpression().getType() instanceof StructType,"Debe ser de tipo Struct",node);
 		node.setModificable(true);
 		if(definition !=null)
