@@ -58,17 +58,14 @@ public class CodeSelection extends DefaultVisitor {
 
 	//	class VarDefinition { String name;  Type type; }
 	public Object visit(VarDefinition node, Object param) {
-		if(node.isLocal())
-			out("#LOCAL " + node.getName() + ":" + node.getType().getMAPLName());
-		else
-			out("#GLOBAL " + node.getName() + ":" + node.getType().getMAPLName());
+		out("#GLOBAL " + node.getName() + ":" + node.getType().getMAPLName());
 		
         return null;
 	}
 
 	//	class StructDefinition { StructType structtype;  List<Definition> definition; }
 	public Object visit(StructDefinition node, Object param) {
-		out("#GLOBAL " + node.getStructtype().getName() + ":" + node.getType().getMAPLName());
+		//out("#GLOBAL " + node.getStructtype().getName() + ":" + node.getType().getMAPLName());
 		visitChildren(node.getDefinition(),param);
 		return null;
 	}
@@ -186,7 +183,7 @@ public class CodeSelection extends DefaultVisitor {
 		out("#line " + node.getEnd().getLine());
 		node.getLeft().accept(this, CodeFunction.ADDRESS);
 		node.getRight().accept(this, CodeFunction.VALUE);
-		out("store ", node.getLeft().getType());
+		out("store", node.getLeft().getType());
 		return null;
 	}
 
@@ -268,7 +265,7 @@ public class CodeSelection extends DefaultVisitor {
 	//	class Cast { Type targetType;  Expression value; }
 	public Object visit(Cast node, Object param) {
 		node.getValue().accept(this, CodeFunction.VALUE);
-		out("push",node.getTargetType());
+		out(node.getValue().getType().getSuffix() + "2" + node.getTargetType().getSuffix());
 		return null;
 	}
 
@@ -332,7 +329,7 @@ public class CodeSelection extends DefaultVisitor {
 	//	class CharConstant { String value; }
 	public Object visit(CharConstant node, Object param) {
 		assert(param == CodeFunction.VALUE);
-		out("pushc "+node.getValue());
+		out("pushb "+node.getValue().codePointAt(0));
 		return null;
 	}
 

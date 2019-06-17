@@ -1,0 +1,509 @@
+#source "prueba.txt"
+call main
+halt
+#GLOBAL entero:int
+#GLOBAL caracter:byte
+#GLOBAL pareja:struct
+#GLOBAL edad:int
+#GLOBAL empleados:struct
+push 2
+#GLOBAL acme:struct
+#GLOBAL fibonacci:int
+p:
+f:
+pusha bp
+#GLOBAL paramReal:float
+pusha bp
+#GLOBAL paramInt:int
+pusha bp
+#GLOBAL localReal:float
+pusha bp
+#GLOBAL digito:byte
+pusha bp
+#GLOBAL resultado:int
+#line 30
+push -4
+add
+push 6
+add
+loadf
+pushf 10.0
+mulf
+storef
+#line 31
+push -5
+add
+pushb 39
+storeb
+#line 37
+push 4
+add
+loadi
+push 256
+lti
+jz else
+#line 33
+push -5
+add
+push 4
+add
+loadi
+i2b
+storeb
+#line 34
+push -7
+add
+push -5
+add
+loadb
+b2i
+storei
+else:
+#line 37
+push -7
+add
+push -4
+add
+loadf
+f2i
+storei
+push -7
+add
+inicializa:
+pusha bp
+#GLOBAL i:int
+#line 46
+pusha 11
+push 0
+push 2
+mul
+add
+pusha 11
+push 0
+push 6
+mul
+add
+pusha 11
+push 0
+storei
+#line 47
+pusha 11
+push 1
+push 2
+mul
+add
+pusha 11
+push 0
+push 6
+mul
+add
+pusha 11
+push 1
+storei
+#line 48
+pusha 11
+push 2
+push 2
+mul
+add
+pusha 11
+push 0
+push 6
+mul
+add
+pusha 11
+push 1
+storei
+#line 49
+push -2
+add
+push 1
+storei
+#line 54
+inicio_bucle:
+push -2
+add
+loadi
+push 8
+lti
+jz final
+#line 51
+pusha 11
+push 0
+push 2
+mul
+add
+pusha 11
+push -2
+add
+loadi
+push 6
+mul
+add
+pusha 11
+pusha 11
+push 1
+push 2
+mul
+add
+pusha 11
+push -2
+add
+loadi
+push 1
+subi
+push 6
+mul
+add
+pusha 11
+loadi
+storei
+#line 52
+pusha 11
+push 1
+push 2
+mul
+add
+pusha 11
+push -2
+add
+loadi
+push 6
+mul
+add
+pusha 11
+pusha 11
+push 2
+push 2
+mul
+add
+pusha 11
+push -2
+add
+loadi
+push 1
+subi
+push 6
+mul
+add
+pusha 11
+loadi
+storei
+#line 53
+pusha 11
+push 2
+push 2
+mul
+add
+pusha 11
+push -2
+add
+loadi
+push 6
+mul
+add
+pusha 11
+pusha 11
+push 0
+push 2
+mul
+add
+pusha 11
+push -2
+add
+loadi
+push 6
+mul
+add
+pusha 11
+loadi
+pusha 11
+push 1
+push 2
+mul
+add
+pusha 11
+push -2
+add
+loadi
+push 6
+mul
+add
+pusha 11
+loadi
+addi
+storei
+#line 54
+push -2
+add
+push -2
+add
+loadi
+push 1
+addi
+storei
+jmp inicio_bucle
+final:
+main:
+pusha bp
+#GLOBAL i:int
+pusha bp
+#GLOBAL j:int
+call p
+#line 66
+push -2
+add
+push 0
+storei
+#line 67
+pusha 0
+push 2
+add
+pushb 39
+storeb
+#line 68
+pusha 0
+push 0
+add
+pushb 39
+b2i
+storei
+#line 70
+call f
+push -2
+add
+loadi
+i2f
+pusha 0
+push 2
+add
+loadb
+b2i
+outi
+call f
+pushf 1.3
+push 2
+call inicializa
+#line 74
+push -2
+add
+push 0
+storei
+#line 86
+inicio_bucle:
+push -2
+add
+loadi
+push 8
+lti
+jz final
+#line 76
+pushb 39
+outb
+#line 77
+push -2
+add
+loadi
+push 1
+addi
+outi
+#line 78
+pushb 39
+outb
+#line 79
+pushb 39
+outb
+#line 80
+pusha 11
+push 0
+push 2
+mul
+add
+pusha 11
+push -2
+add
+loadi
+push 6
+mul
+add
+pusha 11
+loadi
+outi
+#line 81
+pushb 39
+outb
+#line 82
+pusha 11
+push 1
+push 2
+mul
+add
+pusha 11
+push -2
+add
+loadi
+push 6
+mul
+add
+pusha 11
+loadi
+outi
+#line 83
+pushb 39
+outb
+#line 84
+pusha 11
+push 2
+push 2
+mul
+add
+pusha 11
+push -2
+add
+loadi
+push 6
+mul
+add
+pusha 11
+loadi
+outi
+#line 85
+pushb 39
+outb
+#line 86
+push -2
+add
+push -2
+add
+loadi
+push 1
+addi
+storei
+jmp inicio_bucle
+final:
+#line 89
+pusha 3
+push 0
+add
+push 56
+storei
+#line 90
+pusha 3
+push 0
+add
+loadi
+outi
+#line 92
+push -2
+add
+push 0
+storei
+#line 99
+inicio_bucle:
+push -2
+add
+loadi
+push 2
+lti
+jz final
+#line 94
+push -4
+add
+push 0
+storei
+#line 97
+inicio_bucle:
+push -4
+add
+loadi
+push 2
+lti
+jz final
+#line 96
+pusha 3
+push 0
+add
+push -2
+add
+loadi
+push -4
+add
+loadi
+addi
+storei
+#line 97
+push -4
+add
+push -4
+add
+loadi
+push 1
+addi
+storei
+jmp inicio_bucle
+final:
+#line 99
+push -2
+add
+push -2
+add
+loadi
+push 1
+addi
+storei
+jmp inicio_bucle
+final:
+#line 103
+push -2
+add
+push 0
+storei
+#line 110
+inicio_bucle:
+push -2
+add
+loadi
+push 2
+lti
+jz final
+#line 105
+push -4
+add
+push 0
+storei
+#line 108
+inicio_bucle:
+push -4
+add
+loadi
+push 2
+lti
+jz final
+#line 107
+pusha 3
+push 0
+add
+loadi
+outi
+#line 108
+push -4
+add
+push -4
+add
+loadi
+push 1
+addi
+storei
+jmp inicio_bucle
+final:
+#line 110
+push -2
+add
+push -2
+add
+loadi
+push 1
+addi
+storei
+jmp inicio_bucle
+final:
