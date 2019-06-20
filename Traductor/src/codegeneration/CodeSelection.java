@@ -300,21 +300,7 @@ public class CodeSelection extends DefaultVisitor {
 	        out("load", node.getType());
 	     }else if(((CodeFunction) param) == CodeFunction.ADDRESS){ // Funcion.DIRECCION
 	    	assert (param == CodeFunction.ADDRESS);
-	     	
-	    	if(node.searchDefinition() instanceof VarDefinition && ((VarDefinition)node.searchDefinition()).isLocal()) {
-				out("pusha bp");
-				out("push "+node.getDefinition().getAddress());
-				out("add");
-	     	}else {
-	     		int address;
-	     		
-	     		Definition definition = node.searchDefinition();
-	     		if(definition instanceof Campo) address = ((Campo)definition).getAddress();
-	     		else address = ((VarDefinition)definition).getAddress();
-	     		
-	     		out("pusha " + address);
-	     	}
-	         	
+	     	node.getName().accept(this, CodeFunction.ADDRESS);
 	     	node.getIndex().accept(this, CodeFunction.VALUE);
 	     	out("push " + node.getType().getSize());
 	     	out("mul");

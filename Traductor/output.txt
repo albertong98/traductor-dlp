@@ -1,6 +1,7 @@
 #source "prueba.txt"
 call main
 halt
+push 2
 #FUNC p
 p:
 enter 0
@@ -77,6 +78,10 @@ enter 2
 #line 46
 pusha 11
 push 0
+push 6
+mul
+add
+push 0
 push 2
 mul
 add
@@ -84,6 +89,10 @@ push 0
 storei
 #line 47
 pusha 11
+push 0
+push 6
+mul
+add
 push 1
 push 2
 mul
@@ -92,6 +101,10 @@ push 1
 storei
 #line 48
 pusha 11
+push 0
+push 6
+mul
+add
 push 2
 push 2
 mul
@@ -115,11 +128,27 @@ lti
 jz final0
 #line 51
 pusha 11
+pusha bp
+push -2
+add
+loadi
+push 6
+mul
+add
 push 0
 push 2
 mul
 add
 pusha 11
+pusha bp
+push -2
+add
+loadi
+push 1
+subi
+push 6
+mul
+add
 push 1
 push 2
 mul
@@ -128,11 +157,27 @@ loadi
 storei
 #line 52
 pusha 11
+pusha bp
+push -2
+add
+loadi
+push 6
+mul
+add
 push 1
 push 2
 mul
 add
 pusha 11
+pusha bp
+push -2
+add
+loadi
+push 1
+subi
+push 6
+mul
+add
 push 2
 push 2
 mul
@@ -141,17 +186,38 @@ loadi
 storei
 #line 53
 pusha 11
+pusha bp
+push -2
+add
+loadi
+push 6
+mul
+add
 push 2
 push 2
 mul
 add
 pusha 11
+pusha bp
+push -2
+add
+loadi
+push 6
+mul
+add
 push 0
 push 2
 mul
 add
 loadi
 pusha 11
+pusha bp
+push -2
+add
+loadi
+push 6
+mul
+add
 push 1
 push 2
 mul
@@ -248,6 +314,13 @@ pushb 39
 outb
 #line 80
 pusha 11
+pusha bp
+push -2
+add
+loadi
+push 6
+mul
+add
 push 0
 push 2
 mul
@@ -259,6 +332,13 @@ pushb 39
 outb
 #line 82
 pusha 11
+pusha bp
+push -2
+add
+loadi
+push 6
+mul
+add
 push 1
 push 2
 mul
@@ -270,6 +350,13 @@ pushb 39
 outb
 #line 84
 pusha 11
+pusha bp
+push -2
+add
+loadi
+push 6
+mul
+add
 push 2
 push 2
 mul

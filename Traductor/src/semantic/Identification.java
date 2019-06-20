@@ -337,7 +337,6 @@ public class Identification extends DefaultVisitor {
 //		VarDefinition definition = variables.getFromTop(node.toString());
 //		predicado(definition != null, "Variable no definida "+node.getName(),node);
 //		node.setDefinition(definition);
-		
 		return null;
 	}
 
