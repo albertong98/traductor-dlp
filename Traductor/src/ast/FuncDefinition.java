@@ -83,7 +83,20 @@ public class FuncDefinition extends AbstractDefinition {
 	private List<Definition> defs;
 	private List<Sentence> sentence;
 	private Type type;
+	
+	public int getParamSize(){
+		int paramSize = 0;
+		for(Definition def:params)
+			paramSize += def.getType().getSize();
+		return paramSize;
+	}
 
+	public int getDefsSize(){
+		int defSize = 0;
+		for(Definition def:defs)
+			defSize += def.getType().getSize();
+		return defSize;
+	}
 	public String toString() {
        return "{name:" + getName() + ", params:" + getParams() + ", defs:" + getDefs() + ", sentence:" + getSentence() + ", type:" + getType() + "}";
    }

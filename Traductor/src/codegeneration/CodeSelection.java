@@ -78,17 +78,16 @@ public class CodeSelection extends DefaultVisitor {
 	public Object visit(FuncDefinition node, Object param) {
 		out("#FUNC " + node.getName());
 		out(node.getName()+":");
+		out("enter "+node.getDefsSize());
 		for(Definition child : node.getParams()){
-			out("pusha bp");
 			child.accept(this, CodeFunction.ADDRESS);
 		}
 		for(Definition child : node.getDefs()){
-			out("pusha bp");
 			child.accept(this, CodeFunction.ADDRESS);
 		}
 		visitChildren(node.getSentence(),param);
 		if(node.getType() == null)
-			out("ret 0,0,0");
+			out(String.format("ret 0,%1$s,%2$s",node.getDefsSize(),node.getParamSize()));
 		return null;
 	}
 
@@ -154,10 +153,12 @@ public class CodeSelection extends DefaultVisitor {
 		if(node.getIfSentences()!=null)
 			for(Sentence child:node.getIfSentences())
 				child.accept(this, param);
+		out("jmp finif");
 		out("else:");
 		if(node.getElseSentences()!=null)
 			for(Sentence child:node.getElseSentences())
-				child.accept(this, param);	
+				child.accept(this, param);
+		out("finif:");	
 
 		return null;
 	}
@@ -201,10 +202,12 @@ public class CodeSelection extends DefaultVisitor {
 	public Object visit(Function node, Object param) {
 
 		// super.visit(node, param);
-		out("call "+node.getName());
 		if (node.getExpressions() != null)
 			for (Expression child : node.getExpressions())
 				child.accept(this, param);
+		out("call "+node.getName());
+		if(node.getDefinition().getType() != null)
+			out("pop",node.getDefinition().getType());
 
 		return null;
 	}
@@ -213,18 +216,9 @@ public class CodeSelection extends DefaultVisitor {
 	public Object visit(Return node, Object param) {
 		// super.visit(node, param);
 		if (node.getExpression() != null)
-			node.getExpression().accept(this, param);
+			node.getExpression().accept(this, CodeFunction.VALUE);
 		FuncDefinition funcDef = node.getFuncDefinition();
-		
-		int paramSize = 0;
-		for(Definition def:funcDef.getParams())
-			paramSize += def.getType().getSize();
-
-		int varSize = 0;
-		for(Definition def:funcDef.getDefs())
-			varSize+= def.getType().getSize();
-		
-		out(String.format("ret %1$s,%2$s,%3$s",funcDef.getType().getSize(),varSize,paramSize)); 
+		out(String.format("ret %1$s,%2$s,%3$s",funcDef.getType().getSize(),funcDef.getDefsSize(),funcDef.getParamSize())); 
 		return null;
 	}
 
@@ -272,6 +266,7 @@ public class CodeSelection extends DefaultVisitor {
 		}else{
 			assert(param == CodeFunction.ADDRESS);
 			if(node.getDefinition().isLocal()) {
+				out("pusha bp");
 				out("push "+node.getDefinition().getAddress());
 				out("add");
 			}else
@@ -291,12 +286,10 @@ public class CodeSelection extends DefaultVisitor {
 	public Object visit(FunctionExpression node, Object param) {
 
 		// super.visit(node, param);
-		out("call "+node.getName());
-		
 		if (node.getExpressions() != null)
 			for (Expression child : node.getExpressions())
 				child.accept(this, param);
-		
+		out("call "+node.getName());
 		return null;
 	}
 
@@ -309,7 +302,8 @@ public class CodeSelection extends DefaultVisitor {
 	    	assert (param == CodeFunction.ADDRESS);
 	     	
 	    	if(node.searchDefinition() instanceof VarDefinition && ((VarDefinition)node.searchDefinition()).isLocal()) {
-	     		out("push "+node.getDefinition().getAddress());
+				out("pusha bp");
+				out("push "+node.getDefinition().getAddress());
 				out("add");
 	     	}else {
 	     		int address;
@@ -325,7 +319,7 @@ public class CodeSelection extends DefaultVisitor {
 	     	out("push " + node.getType().getSize());
 	     	out("mul");
 	     	out("add");
-	     	node.getName().accept(this, CodeFunction.ADDRESS);
+	     	//node.getName().accept(this, CodeFunction.ADDRESS);
 	     }
 		 return null;
 	}

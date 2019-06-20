@@ -239,6 +239,8 @@ public class TypeChecking extends DefaultVisitor {
 
 		if (node.getExpression() != null)
 			node.getExpression().accept(this, param);
+		
+		predicado(node.getExpression().getType().getClass().equals(node.getFuncDefinition().getType().getClass()),"La expresion no es del tipo de retorno de la funcion");
 
 		return null;
 	}
