@@ -25,8 +25,24 @@ public class CharConstant extends AbstractExpression {
 	}
 
 	public String getValue() {
-		return value;
+		if(value.length() > 3)
+			return parseSpecialChar();
+		else
+		    return value.substring(1,value.length()-1);
 	}
+
+	private String parseSpecialChar() {
+		if(value.contains("n"))
+			return "\n";
+		if(value.contains("t"))
+			return "\t";
+		if(value.contains("r"))
+			return "\r";
+		if(value.contains("b"))
+		    return "\b";
+		return value.substring(1,value.length()-1);
+	}
+
 	public void setValue(String value) {
 		this.value = value;
 	}

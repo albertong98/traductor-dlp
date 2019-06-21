@@ -1,7 +1,6 @@
 #source "prueba.txt"
 call main
 halt
-push 2
 #FUNC p
 p:
 enter 0
@@ -24,7 +23,7 @@ storef
 pusha bp
 push -5
 add
-pushb 39
+pushb 48
 storeb
 #line 37
 pusha bp
@@ -253,13 +252,13 @@ storei
 pusha 0
 push 2
 add
-pushb 39
+pushb 48
 storeb
 #line 68
 pusha 0
 push 0
 add
-pushb 39
+pushb 48
 b2i
 storei
 #line 70
@@ -275,6 +274,8 @@ loadb
 b2i
 call f
 outi
+pushb 10
+outb
 pushf 1.3
 push 2
 call f
@@ -296,7 +297,7 @@ push 8
 lti
 jz final1
 #line 76
-pushb 39
+pushb 40
 outb
 #line 77
 pusha bp
@@ -307,10 +308,10 @@ push 1
 addi
 outi
 #line 78
-pushb 39
+pushb 41
 outb
 #line 79
-pushb 39
+pushb 32
 outb
 #line 80
 pusha 11
@@ -328,7 +329,7 @@ add
 loadi
 outi
 #line 81
-pushb 39
+pushb 43
 outb
 #line 82
 pusha 11
@@ -346,7 +347,7 @@ add
 loadi
 outi
 #line 83
-pushb 39
+pushb 61
 outb
 #line 84
 pusha 11
@@ -364,7 +365,7 @@ add
 loadi
 outi
 #line 85
-pushb 39
+pushb 10
 outb
 #line 86
 pusha bp
@@ -381,16 +382,38 @@ jmp inicio_bucle1
 final1:
 #line 89
 pusha 3
+push 1
+push 4
+mul
+add
+push 0
+add
+push 1
+push 2
+mul
+add
 push 0
 add
 push 56
 storei
 #line 90
 pusha 3
+push 1
+push 4
+mul
+add
+push 0
+add
+push 1
+push 2
+mul
+add
 push 0
 add
 loadi
 outi
+pushb 10
+outb
 #line 92
 pusha bp
 push -2
@@ -423,6 +446,22 @@ lti
 jz final3
 #line 96
 pusha 3
+pusha bp
+push -2
+add
+loadi
+push 4
+mul
+add
+push 0
+add
+pusha bp
+push -4
+add
+loadi
+push 2
+mul
+add
 push 0
 add
 pusha bp
@@ -493,10 +532,28 @@ lti
 jz final5
 #line 107
 pusha 3
+pusha bp
+push -2
+add
+loadi
+push 4
+mul
+add
+push 0
+add
+pusha bp
+push -4
+add
+loadi
+push 2
+mul
+add
 push 0
 add
 loadi
 outi
+pushb 32
+outb
 #line 108
 pusha bp
 push -4

@@ -139,8 +139,12 @@ public class CodeSelection extends DefaultVisitor {
 	//	class Print { Expression expression;  String value; }
 	public Object visit(Print node, Object param) {
 		out("#line " + node.getEnd().getLine());
-        node.getExpression().accept(this, CodeFunction.VALUE);
-        out("out", node.getExpression().getType());
+		node.getExpression().accept(this, CodeFunction.VALUE);
+		out("out", node.getExpression().getType());
+		if(node.getValue() != ""){
+			out("pushb "+node.getValue().codePointAt(0));
+			out("outb");
+		}
 		return null;
 	}
 
@@ -323,7 +327,8 @@ public class CodeSelection extends DefaultVisitor {
 	//	class CharConstant { String value; }
 	public Object visit(CharConstant node, Object param) {
 		assert(param == CodeFunction.VALUE);
-		out("pushb "+node.getValue().codePointAt(0));
+        System.out.println(Character.codePointAt(node.getValue(),0));
+		out("pushb "+Character.codePointAt(node.getValue(),0));
 		return null;
 	}
 
